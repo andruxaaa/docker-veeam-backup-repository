@@ -4,7 +4,8 @@ RUN apk update && \
     apk add --no-cache --virtual .veeam-deps \
         openssh \
         perl \
-        augeas && \
+        augeas \
+        shadow && \
     mkdir /root/.ssh && \
     chmod 700 /root/.ssh && \
     augtool set /files/etc/ssh/sshd_config/Ciphers/1 aes256-cbc && \
@@ -23,6 +24,7 @@ RUN apk update && \
     augtool set /files/etc/ssh/sshd_config/MACs/4 hmac-sha1 && \
     augtool set /files/etc/ssh/sshd_config/PasswordAuthentication no && \
     augtool set /files/etc/ssh/sshd_config/PermitRootLogin yes && \
+    usermod -p '*' root && \
     rm -rf /var/cache/apk/*
 
 COPY docker-entrypoint /usr/local/bin/
