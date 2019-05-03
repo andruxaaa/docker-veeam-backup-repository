@@ -4,8 +4,7 @@ RUN apk update && \
     apk add --no-cache --virtual .veeam-deps \
         openssh \
         perl \
-        augeas \
-        && \
+        augeas && \
     mkdir /root/.ssh && \
     chmod 700 /root/.ssh && \
     augtool 'set /files/etc/ssh/sshd_config/Ciphers "chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"' && \
