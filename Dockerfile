@@ -19,7 +19,7 @@ RUN apk update && \
     augtool set /files/etc/ssh/sshd_config/KexAlgorithms/4 diffie-hellman-group1-sha1 && \
     augtool set /files/etc/ssh/sshd_config/MACs/1 hmac-sha2-512 && \
     augtool set /files/etc/ssh/sshd_config/MACs/2 hmac-sha2-256 && \
-    augtool set /files/etc/ssh/sshd_config/MACs/6 hmac-md5 && \
+    augtool set /files/etc/ssh/sshd_config/MACs/3 hmac-md5 && \
     augtool set /files/etc/ssh/sshd_config/Protocol 2 && \
     rm -rf /var/cache/apk/*
 
