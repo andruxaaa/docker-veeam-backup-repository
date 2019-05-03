@@ -1,11 +1,12 @@
-FROM i386/alpine:3.7
+FROM alpine:latest
 
-RUN apk add --no-cache --virtual .veeam-deps \
+RUN apk update && \
+    apk add --no-cache --virtual .veeam-deps \
         openssh \
         perl \
         augeas
-
 RUN mkdir /root/.ssh && chmod 700 /root/.ssh
+RUN rm -rf /var/cache/apk/*
 
 COPY docker-entrypoint /usr/local/bin/
 
