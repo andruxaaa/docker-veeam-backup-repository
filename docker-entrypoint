@@ -13,6 +13,4 @@ fi
 chown root:root /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 
-service veeamservice start
-
 exec "$@"

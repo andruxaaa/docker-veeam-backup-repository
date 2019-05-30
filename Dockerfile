@@ -1,11 +1,13 @@
-FROM debian:stable-slim
-COPY veeam.list /etc/apt/sources.list.d/
-COPY veeam.gpg /etc/apt/trusted.gpg.d/
-COPY docker-entrypoint /usr/local/bin/
-RUN apt-get --yes update && \
-    apt-get --yes install veeam openssh-server perl augeas-tools && \
-    apt-get --yes autoremove && \
-    apt-get --yes clean && \
+FROM alpine:latest
+
+RUN apk update && \
+    apk add --no-cache --virtual .veeam-deps \
+        openssh \
+        perl \
+        augeas \
+        shadow && \
+    mkdir /root/.ssh && \
+    chmod 700 /root/.ssh && \
     augtool set /files/etc/ssh/sshd_config/Ciphers/1 aes256-cbc && \
     augtool set /files/etc/ssh/sshd_config/Ciphers/2 aes192-cbc && \
     augtool set /files/etc/ssh/sshd_config/Ciphers/3 aes128-cbc && \
@@ -22,11 +24,13 @@ RUN apt-get --yes update && \
     augtool set /files/etc/ssh/sshd_config/MACs/4 hmac-sha1 && \
     augtool set /files/etc/ssh/sshd_config/PasswordAuthentication no && \
     augtool set /files/etc/ssh/sshd_config/PermitRootLogin yes && \
-    mkdir /run/sshd && \
-    mkdir /root/.ssh && \
-    chmod 700 /root/.ssh && \
     usermod -p '*' root && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/cache/apk/*
+
+COPY docker-entrypoint /usr/local/bin/
+
 EXPOSE 22
+
 ENTRYPOINT ["docker-entrypoint"]
+
 CMD [ "/usr/sbin/sshd", "-D", "-e"]
