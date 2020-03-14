@@ -12,3 +12,7 @@ docker run --rm kjake/veeam-backup-repository -p 2222:22 \
     -v $PWD/veeam.pub:/root/.ssh/authorized_keys \
     -v /volume2/VeeamBackup:/veeam
 ```
+
+## Acknowledgments
+
+- Thanks to [@t3easy](https://hub.docker.com/r/t3easy/veeam-backup-repository) for putting this together originally. 
