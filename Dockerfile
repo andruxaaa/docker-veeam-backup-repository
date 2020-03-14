@@ -1,11 +1,10 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
-RUN apk update && \
-    apk add --no-cache --virtual .veeam-deps \
-        openssh \
+RUN apt-get update && \
+    apt-get install \
+        openssh-server \
         perl \
-        augeas \
-        shadow && \
+        augeas-tools && \
     mkdir /root/.ssh && \
     chmod 700 /root/.ssh && \
     augtool set /files/etc/ssh/sshd_config/Ciphers/1 aes256-cbc && \
@@ -25,7 +24,7 @@ RUN apk update && \
     augtool set /files/etc/ssh/sshd_config/PasswordAuthentication no && \
     augtool set /files/etc/ssh/sshd_config/PermitRootLogin yes && \
     usermod -p '*' root && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apt/*
 
 COPY docker-entrypoint /usr/local/bin/
 
