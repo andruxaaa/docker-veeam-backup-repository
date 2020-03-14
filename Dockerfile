@@ -1,7 +1,8 @@
 FROM ubuntu:latest
 
-RUN apt-get update && \
-    apt-get install \
+RUN echo -e 'Dir::Cache::pkgcache "";\nDir::Cache::srcpkgcache "";' | sudo tee /etc/apt/apt.conf.d/00_disable-cache-files && \
+    apt-get update -y && \
+    apt-get install -y \
         openssh-server \
         perl \
         augeas-tools && \

@@ -8,7 +8,7 @@ Mount the public key to `/root/.ssh/authorized_keys` and a folder of your NAS to
 Expose a port and map it to port 22.
 
 ```bash
-docker run --rm t3easy/veeam-backup-repository -p 2222:22 \
+docker run --rm kjake/veeam-backup-repository -p 2222:22 \
     -v $PWD/veeam.pub:/root/.ssh/authorized_keys \
     -v /volume2/VeeamBackup:/veeam
 ```
