@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 USER root
 
-RUN echo -e 'Dir::Cache::pkgcache "";\nDir::Cache::srcpkgcache "";' | tee /etc/apt/apt.conf.d/00_disable-cache-files
+RUN echo 'Dir::Cache::pkgcache "";\nDir::Cache::srcpkgcache "";' | tee /etc/apt/apt.conf.d/00_disable-cache-files
 RUN apt-get update -y && \
     apt-get install -y \
         openssh-server \
