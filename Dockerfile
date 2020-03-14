@@ -27,7 +27,8 @@ RUN augtool set /files/etc/ssh/sshd_config/Ciphers/1 aes256-cbc && \
     augtool set /files/etc/ssh/sshd_config/PasswordAuthentication no && \
     augtool set /files/etc/ssh/sshd_config/PermitRootLogin yes
 RUN usermod -p '*' root && \
-    rm -rf /var/cache/apt/*
+    rm -rf /var/cache/apt/* && \
+    mkdir -p /var/run/sshd
 
 COPY docker-entrypoint /usr/local/bin/
 
