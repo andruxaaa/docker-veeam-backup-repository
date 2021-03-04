@@ -9,8 +9,8 @@ Prepare your NAS/Server: Install Docker, create a shared folder for the backups.
 
 ```bash
 docker run -d \
-  -p 2222:22 \
-  -p 2900-3000:2900-3000 \
+  -p 2244:22 \
+  -p 2500-3000:2500-3000 \
   --name veeam \
   --restart always \
   -v $PWD/veeam.pub:/root/.ssh/authorized_keys \
